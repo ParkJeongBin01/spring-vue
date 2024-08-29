@@ -2,7 +2,7 @@ package org.scoula.board.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
-import org.scoula.common.UploadFiles;
+import org.scoula.common.util.UploadFiles;
 import org.scoula.board.domain.BoardAttachmentVO;
 import org.scoula.board.domain.BoardVO;
 import org.scoula.board.dto.BoardDTO;
@@ -61,7 +61,8 @@ public class BoardServiceImpl implements BoardService {
         log.info("delete......." + no);
         BoardDTO board = get(no);
 
-        mapper.delete(no);
+        mapper.delete(no); //첨부파일이 있으면 안 된다.
+        //해결 : 1. 첨부파일부터 삭제하고 게시판 삭제. 2. Pathcade 설정. 삭제할 때 자식도 같이 삭제해라(sql이용해서 ON DELETE CASCADE 넣어준다,)
         return board;
     }
 

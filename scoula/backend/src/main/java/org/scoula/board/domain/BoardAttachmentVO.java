@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j;
-import org.scoula.common.UploadFiles;
+import org.scoula.common.util.UploadFiles;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;

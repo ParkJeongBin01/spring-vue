@@ -9,7 +9,7 @@ import config from '@/config';
 </template>
 <style scoped>
 .jumbotron {
-  background-image: url('@/assets/images/background.jpg');
+  background-image: url('@/assets/images/mo.jpg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

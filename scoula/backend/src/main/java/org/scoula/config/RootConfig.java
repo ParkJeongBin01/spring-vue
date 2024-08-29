@@ -21,8 +21,8 @@ import javax.sql.DataSource;
 @Configuration
 //@ComponentScan(basePackages = {"org.scoula"})
 @PropertySource({"classpath:/application.properties"})
-@MapperScan(basePackages = {"org.scoula.board.mapper"}) //자동으로 만들어 준다. Controller Bean 등록해줌.
-@ComponentScan(basePackages = {"org.scoula.board.service"})
+@MapperScan(basePackages = {"org.scoula.board.mapper","org.scoula.member.mapper"}) //자동으로 만들어 준다. Controller Bean 등록해줌.
+@ComponentScan(basePackages = {"org.scoula.board.service","org.scoula.member.service"})
 @Slf4j
 @EnableTransactionManagement
 
