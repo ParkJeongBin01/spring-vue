@@ -43,6 +43,9 @@ const join = async () => {
   if (member.password != member.password2) {
     return alert('비밀번호가 일치하지 않습니다.');
   }
+  if (member.password || member.password2 == '') {
+    return alert('비밀번호를 입력하세요.');
+  }
   if (avatar.value.files.length > 0) {
     member.avatar = avatar.value.files[0]; //첨부파일이 있으면 member.avatar에 추가.
   }

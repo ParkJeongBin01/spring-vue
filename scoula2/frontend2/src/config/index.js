@@ -18,11 +18,11 @@ export default {
       url: '/gallery/list',
       icon: 'fa-regular fa-images',
     },
-    // {
-    //   title: '신고합니다',
-    //   url: '/danger/list',
-    //   icon: 'fa-solid fa-land-mine-on',
-    // },
+    {
+      title: '날씨',
+      url: '/weather/list',
+      icon: 'fa-solid fa-land-mine-on',
+    },
   ],
   accoutMenus: {
     // 인증 관련 메뉴 정보

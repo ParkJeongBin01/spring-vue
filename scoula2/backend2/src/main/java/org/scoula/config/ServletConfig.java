@@ -14,7 +14,8 @@ import org.springframework.web.servlet.view.JstlView;
         "org.scoula.controller",
         "org.scoula.exception",
         "org.scoula.board.controller",
-        "org.scoula.member.controller"}) // Spring MVC용 컴포넌트 등록을 위한 스캔 패키지
+        "org.scoula.member.controller",
+        "org.scoula.weather.controller"}) // Spring MVC용 컴포넌트 등록을 위한 스캔 패키지
 public class ServletConfig implements WebMvcConfigurer {
     @Override
 
@@ -52,7 +53,4 @@ public class ServletConfig implements WebMvcConfigurer {
 
     //이렇게도 가능하지만 나 왜 안되냐;;;;
     //return new StandardServletMultipartResolver();
-
-
-
 }
