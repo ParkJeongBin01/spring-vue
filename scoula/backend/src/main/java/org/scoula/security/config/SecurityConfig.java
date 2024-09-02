@@ -100,11 +100,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // 경로별 접근 권한 설정
         http
                 .authorizeRequests() // 경로별 접근 권한 설정
-                .antMatchers(HttpMethod.OPTIONS).permitAll();
+                .antMatchers(HttpMethod.OPTIONS).permitAll()
                 //.antMatchers("/api/security/all").permitAll() // 모두 허용
                 //.antMatchers("/api/security/member").access("hasRole('ROLE_MEMBER')") // ROLE_MEMBER 이상 접근 허용
                 //.antMatchers("/api/security/admin").access("hasRole('ROLE_ADMIN')") // ROLE_ADMIN 이상 접근 허용
-                //.anyRequest().authenticated(); // 나머지는 로그인 된 경우 모두 허용
+                .anyRequest().authenticated(); // 나머지는 로그인 된 경우 모두 허용
 //
 //        http.formLogin()
 //                .loginPage("/security/login") // Get 리다이렉트

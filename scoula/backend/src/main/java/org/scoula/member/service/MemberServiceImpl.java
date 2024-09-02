@@ -88,7 +88,7 @@ public class MemberServiceImpl implements MemberService {
             throw new PasswordMissmatchException();
         }
 
-        changePassword.setNewPassword(passwordEncoder.encode(changePassword.getNewPassword()));
+        changePassword.setNewPassword(passwordEncoder.encode(changePassword.getNewPassword())); //db에 저장하기 전에 암호화를 하는 과정.
 
         mapper.updatePassword(changePassword);
     }

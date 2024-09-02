@@ -1,12 +1,13 @@
 <script setup>
 import authApi from '@/api/authApi';
+import router from '@/router';
 import { useAuthStore } from '@/stores/auth';
 import { computed, reactive, ref } from 'vue';
 
 const auth = useAuthStore();
 
 const avatar = ref(null);
-const avatarPath = '/api/member/${auth.username}/avatar';
+const avatarPath = `/api/member/${auth.username}/avatar`;
 const member = reactive({
   username: auth.username,
   email: auth.email,
@@ -19,19 +20,20 @@ const error = ref('');
 const disableSubmit = computed(() => !member.email || !member.password);
 
 const onSubmit = async () => {
-  if (!confirm('수정하시겠습니까??')) return;
-
-  if (avatar.value.files.length > 0) {
+  if (!confirm('수정하시겠습니까?')) return;
+  if (avatar.value && avatar.value.files.length > 0) {
     member.avatar = avatar.value.files[0];
   }
-
   try {
     await authApi.update(member);
     error.value = '';
     auth.changeProfile(member);
     alert('정보를 수정하였습니다.');
+    router.push({ name: 'home' }).then(() => {
+      window.location.reload();
+    });
   } catch (e) {
-    error.value = e.response.data;
+    error.value = e.response?.data || '알 수 없는 오류가 발생했습니다.';
   }
 };
 </script>

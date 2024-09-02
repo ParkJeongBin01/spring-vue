@@ -47,3 +47,5 @@ where m.username = 'admin';
 select * from tbl_member;
 select * from tbl_member_auth order by auth;
 
+select * from scoula_db.tbl_board_attachment;
+select * from scoula_db.tbl_board;

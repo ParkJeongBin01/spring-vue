@@ -26,7 +26,6 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public List<BoardDTO> getList()  {
     log.info("getList............");
-
     return mapper.getList().stream() //BoardVO()의 스트림
             .map(BoardDTO::of)
             .toList();
@@ -50,9 +49,16 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public BoardDTO update(BoardDTO board) {
-        log.info("update......" + board);
-        mapper.update(board.toVO());
-
+        log.info("update...... " + board);
+        BoardVO boardVO = board.toVO();
+        log.info("update...... " + boardVO);
+        mapper.update
+                (boardVO);
+// 파일 업로드 처리
+        List<MultipartFile> files = board.getFiles();
+        if(files != null && !files.isEmpty()) {
+            upload(board.getNo(), files);
+        }
         return get(board.getNo());
     }
 

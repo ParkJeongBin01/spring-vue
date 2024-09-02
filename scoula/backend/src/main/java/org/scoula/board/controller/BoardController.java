@@ -33,7 +33,7 @@ public class BoardController {
     //Talend로 Get - http://localhost:8080/api/board확인
 
     @GetMapping("/{no}")
-    public ResponseEntity<BoardDTO> getList(@PathVariable Long no){
+    public ResponseEntity<BoardDTO> getById(@PathVariable Long no){
         return ResponseEntity.ok(service.get(no));
     }
     //Talend로 Get - http://localhost:8080/api/board/no(db no숫자)확인
