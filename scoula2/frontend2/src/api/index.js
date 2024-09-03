@@ -16,7 +16,7 @@ instance.interceptors.request.use(
     const token = getToken();
     if (token) {
       //토큰 있는 경우
-      config.headers['Authorization'] = 'Bearer ${token}';
+      config.headers['Authorization'] = `Bearer ${token}`;
       console.log(config.headers.Authorization);
     }
     //config.headers : 요청헤더
@@ -53,3 +53,4 @@ instance.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+export default instance; // 인터셉터가 적용된 axios 인스턴스

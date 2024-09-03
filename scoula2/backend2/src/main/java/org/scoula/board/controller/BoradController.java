@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.scoula.board.domain.BoardAttachmentVO;
 import org.scoula.board.dto.BoardDTO;
 import org.scoula.board.service.BoardService;
+import org.scoula.common.pagination.Page;
+import org.scoula.common.pagination.PageRequest;
 import org.scoula.common.util.UploadFiles;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,11 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.util.List;
 
-@org.springframework.web.bind.annotation.RestController
+@RestController
 @RequestMapping("api/board")
 @RequiredArgsConstructor
 @Slf4j
-public class RestController {
+public class BoradController {
     private final BoardService service;
 
 //    @GetMapping("")
@@ -26,20 +28,25 @@ public class RestController {
 //    }
     //Talend로 Get - http://localhost:8080/api/board확인
 
-    @GetMapping("")
-    public ResponseEntity<List<BoardDTO>> getList(){
-        return ResponseEntity.ok(service.getList());
-    }
+//    @GetMapping("")
+//    public ResponseEntity<List<BoardDTO>> getList(){
+//        return ResponseEntity.ok(service.getList());
+//    }
     //Talend로 Get - http://localhost:8080/api/board확인
 
+    @GetMapping("")
+    public ResponseEntity<Page> getList(PageRequest pageRequest) {
+        return ResponseEntity.ok(service.getPage(pageRequest));
+    }
+
     @GetMapping("/{no}")
-    public ResponseEntity<BoardDTO> getList(@PathVariable Long no){
+    public ResponseEntity<BoardDTO> getByid(@PathVariable Long no){
         return ResponseEntity.ok(service.get(no));
     }
     //Talend로 Get - http://localhost:8080/api/board/no(db no숫자)확인
 
     @PostMapping("")
-    public ResponseEntity<BoardDTO> create(@RequestBody BoardDTO board){
+    public ResponseEntity<BoardDTO> create(BoardDTO board){
         return ResponseEntity.ok(service.create(board));
     }
     //Talend로 Post - http://localhost:8080/api/board확인 생성(post)

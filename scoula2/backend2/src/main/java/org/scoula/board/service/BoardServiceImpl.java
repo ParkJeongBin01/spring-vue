@@ -2,6 +2,8 @@ package org.scoula.board.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
+import org.scoula.common.pagination.Page;
+import org.scoula.common.pagination.PageRequest;
 import org.scoula.common.util.UploadFiles;
 import org.scoula.board.domain.BoardAttachmentVO;
 import org.scoula.board.domain.BoardVO;
@@ -26,7 +28,6 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public List<BoardDTO> getList()  {
     log.info("getList............");
-
     return mapper.getList().stream() //BoardVO()의 스트림
             .map(BoardDTO::of)
             .toList();
@@ -50,9 +51,16 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public BoardDTO update(BoardDTO board) {
-        log.info("update......" + board);
-        mapper.update(board.toVO());
-
+        log.info("update...... " + board);
+        BoardVO boardVO = board.toVO();
+        log.info("update...... " + boardVO);
+        mapper.update
+                (boardVO);
+// 파일 업로드 처리
+        List<MultipartFile> files = board.getFiles();
+        if(files != null && !files.isEmpty()) {
+            upload(board.getNo(), files);
+        }
         return get(board.getNo());
     }
 
@@ -103,5 +111,13 @@ public class BoardServiceImpl implements BoardService {
     public boolean deleteAttachment(Long no) {
         return mapper.deleteAttachment(no) == 1;
     }
-}
 
+    @Override
+    public Page<BoardDTO> getPage(PageRequest pageRequest) {
+        List<BoardVO> boards = mapper.getPage(pageRequest);
+        int totalCount = mapper.getTotalCount();
+        return Page.of(pageRequest, totalCount,
+                boards.stream().map(BoardDTO::of).toList());
+
+    }
+}

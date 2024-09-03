@@ -1,5 +1,5 @@
 <script setup>
-defineProps({ username: String });
+const props = defineProps({ username: String });
 
 const avatar = '/api/member/${props.username}/avatar';
 </script>

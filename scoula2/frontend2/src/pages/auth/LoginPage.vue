@@ -14,7 +14,7 @@ const member = reactive({
 
 const error = ref('');
 
-const disalbleSubmit = computed(() => !(member.username && member.password)); //form 유효성 검증
+const disableSubmit = computed(() => !(member.username && member.password)); //form 유효성 검증
 //id, password 둘 다 넣었는지 검사.
 
 //async왜 넣어줌?  await auth.login(member);비동기 처리하려고

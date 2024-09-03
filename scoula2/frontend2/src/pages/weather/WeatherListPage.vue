@@ -22,9 +22,9 @@ const fetchWeatherData = async () => {
       <div>온도 : {{ weather.main.temp }}°C</div>
       <div>습도: {{ weather.main.humidity }}%</div>
       <br />
-      <!-- <div>체감 온도: {{ weather.main.feels_like }}°C</div>
+      <div>체감 온도: {{ weather.main.feels_like }}°C</div>
       <div>최저 온도: {{ weather.main.temp_min }}°C</div>
-      <div>최고 온도: {{ weather.main.temp_max }}°C</div> -->
+      <div>최고 온도: {{ weather.main.temp_max }}°C</div>
     </div>
   </div>
 </template>
