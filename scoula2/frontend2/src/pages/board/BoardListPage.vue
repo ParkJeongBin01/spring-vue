@@ -3,9 +3,11 @@ import api from '@/api/boardApi';
 import { ref, reactive, computed, watch } from 'vue';
 import moment from 'moment';
 import { useRoute, useRouter } from 'vue-router';
+import { useAuthStore } from '@/stores/auth';
 
 const cr = useRoute();
 const router = useRouter();
+const auth = useAuthStore(); //현재 로그인한 사용자의 정보.
 
 const page = ref({}); //이번 페이지 변수
 
@@ -39,6 +41,11 @@ const load = async (query) => {
   } catch {}
 };
 
+const avatarpath = (username) => {
+  const defalutavatar = '/api/member/ogu/avatar';
+  return username === auth.username ? `/api/member/${username}/avatar` : defalutavatar;
+};
+
 load(pageRequest);
 </script>
 
@@ -63,7 +70,12 @@ load(pageRequest);
               {{ article.title }}
             </router-link>
           </td>
-          <td style="width: 200px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{ article.writer }}</td>
+          <td style="width: 200px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">
+            <!-- 여기에 넣자 이미지 -->
+            <img :src="avatarpath(article.writer)" class="avatar avatar-sm" />
+            {{ article.writer }}
+          </td>
+
           <td style="text-align: center">{{ moment(article.regDate).format('YYYY-MM-DD') }}</td>
         </tr>
       </tbody>
