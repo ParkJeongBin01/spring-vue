@@ -1,8 +1,9 @@
 <script setup>
 import { computed, reactive, ref } from 'vue';
 import { useAuthStore } from '@/stores/auth';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
+const cr = useRoute();
 const router = useRouter();
 const auth = useAuthStore();
 
@@ -22,7 +23,12 @@ const login = async () => {
   console.log(member);
   try {
     await auth.login(member);
-    router.push('/'); //로그인 성공시
+    if (cr.query.next) {
+      router.push({ name: cr.query.next });
+    } else {
+      //일반 로그인
+      router.push('/');
+    }
   } catch (e) {
     //로그인 에러
     console.log('에러=====', e);

@@ -14,16 +14,16 @@ const no = cr.params.no;
 const article = ref({});
 
 const back = () => {
-  router.push({ name: 'board/list' });
+  router.push({ name: 'board/list', query: cr.query });
 };
 const update = () => {
   //수정
-  router.push({ name: 'board/update', params: { no: no } }); //쿼리 파라미터 필요 cr.prams.no ->
+  router.push({ name: 'board/update', params: { no: no }, query: cr.query }); //쿼리 파라미터 필요 cr.prams.no ->
 };
 const remove = async () => {
   if (!confirm('삭제할까요?')) return;
   await api.delete(no);
-  router.push({ name: 'board/list' });
+  router.push({ name: 'board/list', query: cr.query });
 };
 const download = async (no) => {
   const URL = '/api/board/download/' + no;

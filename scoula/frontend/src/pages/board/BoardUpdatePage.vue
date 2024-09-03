@@ -5,17 +5,19 @@ import boardApi from '@/api/boardApi';
 const cr = useRoute();
 const router = useRouter();
 const no = cr.params.no;
-const article = reactive({});
-const attachments = ref([]);
-const orgArticle = ref({});
+const article = reactive({}); //2.일로 복사가 된다.
+const attachments = ref([]); //기존 첨부파일 베열로 정의.
+const orgArticle = ref({}); //(원본 게시글) 1.취소 버튼을 눌렀을 떄
 const files = ref(null);
 const back = () => {
-  router.push({ name: 'board/detail', params: { no } });
+  router.push({ name: 'board/detail', params: { no }, query: cr.query });
 };
 const removeFile = async (no, filename) => {
   if (!confirm(filename + '을 삭제할까요?')) return;
-  await boardApi.deleteAttachment(no);
+  await boardApi.deleteAttachment(no); //서버에서 삭제
   const ix = attachments.value.findIndex((f) => f.no === no);
+  //attachments.value 배열
+  //원소를 찾는 메서드 - 서로 리턴값이 다름. /.find(람다함수 가능)찾은 요소의 참조를 리턴. / .findIndex(람다함수 가능)찾은 요소의 인덱스를 리턴.
   attachments.value.splice(ix, 1);
 };
 const submit = async () => {

@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.scoula.board.domain.BoardAttachmentVO;
 import org.scoula.board.dto.BoardDTO;
 import org.scoula.board.service.BoardService;
+import org.scoula.common.pagination.Page;
+import org.scoula.common.pagination.PageRequest;
 import org.scoula.common.util.UploadFiles;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,11 +28,16 @@ public class BoardController {
 //    }
     //Talend로 Get - http://localhost:8080/api/board확인
 
-    @GetMapping("")
-    public ResponseEntity<List<BoardDTO>> getList(){
-        return ResponseEntity.ok(service.getList());
-    }
+//    @GetMapping("")
+//    public ResponseEntity<List<BoardDTO>> getList(){
+//        return ResponseEntity.ok(service.getList());
+//    }
     //Talend로 Get - http://localhost:8080/api/board확인
+    @GetMapping("")
+    public ResponseEntity<Page> getList(PageRequest pageRequest) {
+        return ResponseEntity.ok(service.getPage(pageRequest));
+    }
+
 
     @GetMapping("/{no}")
     public ResponseEntity<BoardDTO> getById(@PathVariable Long no){

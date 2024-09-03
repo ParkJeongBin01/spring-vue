@@ -101,10 +101,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests() // 경로별 접근 권한 설정
                 .antMatchers(HttpMethod.OPTIONS).permitAll()
-                //.antMatchers("/api/security/all").permitAll() // 모두 허용
-                //.antMatchers("/api/security/member").access("hasRole('ROLE_MEMBER')") // ROLE_MEMBER 이상 접근 허용
-                //.antMatchers("/api/security/admin").access("hasRole('ROLE_ADMIN')") // ROLE_ADMIN 이상 접근 허용
-                .anyRequest().authenticated(); // 나머지는 로그인 된 경우 모두 허용
+                //.antMatchers(HttpMethod.GET, "/api/member/*").authenticated()
+                .antMatchers(HttpMethod.PUT,"/api/member/*", "/api/member/*/changepassword").authenticated()
+                .antMatchers(HttpMethod.POST, "/api/board/**").authenticated()
+                .antMatchers(HttpMethod.PUT,"api/board/**").authenticated()
+                .antMatchers(HttpMethod.DELETE,"/api/board/**").authenticated()
+                .anyRequest().permitAll(); // 나머지는 로그인 된 경우 모두 허용
 //
 //        http.formLogin()
 //                .loginPage("/security/login") // Get 리다이렉트
@@ -169,7 +171,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     // 접근 제한 무시 경로 설정 – resource
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/assets/**", "/*", "/api/member/**");
+        web.ignoring().antMatchers("/assets/**", "/*");
     }
 
 }

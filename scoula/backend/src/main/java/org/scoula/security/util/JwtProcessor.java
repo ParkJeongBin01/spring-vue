@@ -13,7 +13,7 @@ import java.util.Date;
 
 @Component //다른 곳에서 써야 하니 붙임.
 public class JwtProcessor {
-    static private final long TOKEN_VALID_MILISECOND = 1000L * 60 * 10; //10분
+    static private final long TOKEN_VALID_MILISECOND = 1000L * 60 * 60 * 4; //4시간
 
     private String secretKey = "fkjdsnjfnsdfisdfosdnfnsdkgnsdilgnuenfiulbernvioernvnuaerhfguierfuir";
     private Key key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));

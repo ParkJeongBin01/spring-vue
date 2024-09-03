@@ -22,7 +22,7 @@ public class MemberController {
     final MemberService service;
 
     @GetMapping("/checkusername/{username}")
-    public ResponseEntity<Boolean> checkUsername(@PathVariable String username) {
+    public ResponseEntity<Boolean> checkUsername(@PathVariable String username) { //회원 중복인지 아닌지 확인할 때 사용. 인증 필요x.
         return ResponseEntity.ok().body(service.checkDuplicate(username));
     }
     @PostMapping("")
@@ -32,7 +32,7 @@ public class MemberController {
 
     @GetMapping("/{username}/avatar")
     public void getAvatar(@PathVariable String username, HttpServletResponse response){
-        String avatarPath = "c:/upload/avatar/" + username + ".png";
+        String avatarPath = "C:/upload/avatar/" + username + ".png";
         File file = new File(avatarPath);
         if(!file.exists()) {
             file = new File("c:/upload/avatar/unknown.png");
@@ -41,12 +41,12 @@ public class MemberController {
     }
 
     @PutMapping("/{username}") //axios할 떄도 axoios.put()으로 해야 한다.
-    public ResponseEntity<MemberDTO> changeProfile(MemberUpdateDTO member) {
+    public ResponseEntity<MemberDTO> changeProfile(MemberUpdateDTO member) { //회원정보 수정할 때 사용. 인증 필요,
         return ResponseEntity.ok(service.update(member));
     }
 
     @PutMapping("/{username}/changepassword")
-    public ResponseEntity<?> changePassword(@RequestBody ChangePasswordDTO changePasswordDTO){
+    public ResponseEntity<?> changePassword(@RequestBody ChangePasswordDTO changePasswordDTO){ //인증 필요.
         service.changePassword(changePasswordDTO);
         return ResponseEntity.ok().build();
     }
